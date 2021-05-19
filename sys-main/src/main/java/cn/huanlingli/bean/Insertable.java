@@ -1,5 +1,5 @@
 package cn.huanlingli.bean;
 
-public interface BaseBean {
+public interface Insertable {
     String ToSQL();
 }
