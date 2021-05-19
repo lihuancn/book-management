@@ -1,5 +1,6 @@
 /* bm_admin */
-# 密码8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92为123456　
+# 密码8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92为123456
+# 加密采用SHA256算法
 insert into bm_admin(username, password, phone, email)
 VALUES ('vorbote', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '19918903791',
         'theodore0126@outlook.com'),
