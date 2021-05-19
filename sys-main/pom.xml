@@ -4,13 +4,44 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <!-- 项目基本信息 -->
     <groupId>cn.huanlingli</groupId>
     <artifactId>sys-main</artifactId>
     <version>1.0</version>
+    <packaging>jar</packaging>
+
+    <!-- 项目信息 -->
+    <name>Book Management System</name>
+    <!--<description></description>-->
+    <url>books.huanglingji.cn</url>
+    <developers>
+        <developer>
+            <name>Theodore Hills</name>
+            <email>theodore0126@outlook.com</email>
+            <roles>
+                <role>参谋</role>
+            </roles>
+            <timezone>utc+8</timezone>
+        </developer>
+    </developers>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.20</version>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.vorbote</groupId>
+            <artifactId>commons</artifactId>
+            <version>1.4.2</version>
+        </dependency>
+    </dependencies>
 
 </project>
