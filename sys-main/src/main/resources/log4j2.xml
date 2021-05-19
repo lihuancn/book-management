@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Properties>
+        <property name="log_level" value="info" />
+        <Property name="log_dir" value="log" />
+        <property name="log_pattern"
+                  value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%p] - [%t] %logger - %m%n" />
+        <property name="file_name" value="test" />
+        <property name="every_file_size" value="100 MB" />
+    </Properties>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${log_pattern}" />
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="${log_level}">
+            <AppenderRef ref="Console" />
+        </Root>
+    </Loggers>
+</Configuration>
