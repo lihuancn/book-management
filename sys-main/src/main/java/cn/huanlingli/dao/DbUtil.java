@@ -15,10 +15,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Set;
 
 /**
  * 这个工具可以用于进行数据库操作
