@@ -1,6 +1,6 @@
 package cn.huanlingli.dao;
 
-import cn.huanlingli.bean.Insertable;
+import cn.huanlingli.bean.intf.Insertable;
 import cn.huanlingli.config.DbEngine;
 import cn.huanlingli.config.SortOrder;
 import cn.huanlingli.excepts.UnsupportedEngineException;
@@ -196,7 +196,7 @@ public final class DbUtil {
     /**
      * 初始化插入参数
      *
-     * @param fields    需要插入的字段名
+     * @param fields 需要插入的字段名
      * @return 该数据库查询工具的唯一实例
      */
     public DbUtil Insert(String... fields) {
@@ -253,15 +253,17 @@ public final class DbUtil {
      * @return 该数据库查询工具的唯一实例
      */
     public DbUtil Table(String tableName) {
+
         // 当不满足以下sql语句时抛出异常
-        if (!(_statement.matches("(select|SELECT)\\s([a-zA-Z0-9_,]+|\\*)\\s(from|FROM)\\s") ||
-                _statement.matches("(delete|DELETE)\\s([a-zA-Z0-9_,]+|\\*)\\s(from|FROM)\\s") ||
-                _statement.matches("(update|UPDATE)\\s") ||
-                _statement.matches("(insert into|INSERT INTO)\\s")))
+        if (!(_statement.matches("(select|SELECT)\\s([a-zA-Z0-9_,]+|\\*)\\s(from|FROM)\\s%s") ||
+                _statement.matches("(delete|DELETE)\\s([a-zA-Z0-9_,]+|\\*)\\s(from|FROM)\\s%s") ||
+                _statement.matches("(update|UPDATE)\\s%s") ||
+                _statement.matches("(insert into|INSERT INTO)\\s%s")))
             throw new WrongSqlSentenceException("There is an SQL syntax error in your SQL sentence");
 
         // 满足以上sql语句，附加表名
         _statement = String.format(_statement, tableName);
+        // log.info(_statement);
         return _instance;
     }
 
@@ -280,7 +282,7 @@ public final class DbUtil {
         int iMax = beans.length - 1;
         int i = 0;
         for (Insertable bean : beans) {
-            builder.append(bean.ToSQL());
+            builder.append(bean.GetValues());
             if (i != iMax) {
                 builder.append(", ");
             }
@@ -350,6 +352,35 @@ public final class DbUtil {
             throw new UnsupportedEngineException("This engine is not supported.");
         }
         return _instance;
+    }
+
+    /**
+     * 通过内置{@code _statement}进行查询
+     *
+     * @return 查询出的结果集
+     * @throws SQLException 可能产生的SQL异常
+     */
+    public ResultSet ExecQuery() throws SQLException {
+        log.info(_statement);
+        if (!_statement.matches("(select|SELECT)\\s([a-zA-Z0-9_,]+|\\*)\\s(from|FROM)\\s([a-zA-Z0-9_,])+"))
+            throw new WrongSqlSentenceException("Your query is not queryable.");
+        PreparedStatement stmt = connection.prepareStatement(_statement);
+        return stmt.executeQuery();
+    }
+
+    /**
+     * 通过内置{@code _statement}进行插入删除修改
+     *
+     * @return 被影响的行数
+     * @throws SQLException 可能产生的SQL异常
+     */
+    public int ExecUpdate() throws SQLException {
+        if (!(_statement.matches("(delete|DELETE)\\s(from|FROM)\\s([a-zA-Z0-9_,]+)\\s.+") ||
+                _statement.matches("(update|UPDATE)\\s([a-zA-Z0-9_,]+)\\s(set|SET).+\\s") ||
+                _statement.matches("(insert into|INSERT INTO)\\s([a-zA-Z0-9_]+)\\s(values|VALUES)\\s.+")))
+            throw new WrongSqlSentenceException("Your query is not queryable.");
+        PreparedStatement stmt = connection.prepareStatement(_statement);
+        return stmt.executeUpdate();
     }
 
     /**

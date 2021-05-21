@@ -2,7 +2,8 @@ package cn.huanlingli.config;
 
 /**
  * 建议除了MySQL v8.x版本使用{@code MYSQL}
- * @author vorbote theodore0126@vorbote.cn
+ *
+ * @author vorbote thills@vorbote.cn
  */
 public enum DbEngine {
 
@@ -13,7 +14,8 @@ public enum DbEngine {
     // This variable is used to store the driver class name.
     private String value;
 
-    DbEngine() { }
+    DbEngine() {
+    }
 
     DbEngine(String value) {
         this.value = value;

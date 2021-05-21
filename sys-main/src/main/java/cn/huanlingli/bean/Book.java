@@ -1,5 +1,6 @@
 package cn.huanlingli.bean;
 
+import cn.huanlingli.bean.intf.Insertable;
 import lombok.*;
 
 /**
@@ -12,10 +13,15 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class Book {
+public class Book implements Insertable {
     private int id;               // 用户ID
     private String bookName;      // 书名
     private String author;        // 作者
     private double price;         // 价格
     private int stock;            // 库存数量
+
+    @Override
+    public String GetValues() {
+        return null;
+    }
 }

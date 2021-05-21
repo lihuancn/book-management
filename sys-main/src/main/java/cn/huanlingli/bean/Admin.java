@@ -1,5 +1,6 @@
 package cn.huanlingli.bean;
 
+import cn.huanlingli.bean.intf.Insertable;
 import lombok.*;
 
 @Data
@@ -7,16 +8,15 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class Admin implements Insertable{
-    private int id;               //id
-    private String username;      //用户名
-    private String password;      //用户密码
-    private String phone;         //电话号码
-    private String email;         //电子邮件
-
+public class Admin implements Insertable {
+    private int id;               // id
+    private String username;      // 用户名
+    private String password;      // 用户密码
+    private String phone;         // 电话号码
+    private String email;         // 电子邮件
 
     @Override
-    public String ToSQL() {
-        return null;
+    public String GetValues() {
+        return String.format("('%s', '%s', '%s', '%s')", username, password, phone, email);
     }
 }

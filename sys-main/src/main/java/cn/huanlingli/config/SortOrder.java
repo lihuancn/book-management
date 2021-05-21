@@ -1,5 +1,10 @@
 package cn.huanlingli.config;
 
+/**
+ * 数据库排序枚举
+ *
+ * @author vorbote thills@vorbote.cn
+ */
 public enum SortOrder {
     ASCENDING("asc"), DESCENDING("desc");
 
