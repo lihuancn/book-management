@@ -1,9 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
-  User: vorbote
-  Date: 2021/5/19
-  Time: 13:55
-  To change this template use File | Settings | File Templates.
+  User:
+  Date:
+  Time:
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
