@@ -7,7 +7,7 @@ public class AdminTest {
     @Test
     public void Test01() {
         Admin admin = new Admin(1, "张三", "123456", "19918903791", "thills@vorbote.cn");
-        System.out.println(admin.ToSQL());
+        System.out.println(admin.GetValues());
     }
 
 

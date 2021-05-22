@@ -3,6 +3,12 @@ package cn.huanlingli.bean;
 import cn.huanlingli.bean.intf.Insertable;
 import lombok.*;
 
+/**
+ * Admin实体类
+ *
+ * @author 易小欢 lihuan@huanlingli.cn
+ */
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

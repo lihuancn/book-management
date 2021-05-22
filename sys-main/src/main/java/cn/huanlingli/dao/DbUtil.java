@@ -253,12 +253,14 @@ public final class DbUtil {
      * @return 该数据库查询工具的唯一实例
      */
     public DbUtil Table(String tableName) {
+        // log.info(_statement);
+
 
         // 当不满足以下sql语句时抛出异常
         if (!(_statement.matches("(select|SELECT)\\s([a-zA-Z0-9_,]+|\\*)\\s(from|FROM)\\s%s") ||
                 _statement.matches("(delete|DELETE)\\s([a-zA-Z0-9_,]+|\\*)\\s(from|FROM)\\s%s") ||
                 _statement.matches("(update|UPDATE)\\s%s") ||
-                _statement.matches("(insert into|INSERT INTO)\\s%s")))
+                _statement.matches("(insert into|INSERT INTO)\\s%s.+")))
             throw new WrongSqlSentenceException("There is an SQL syntax error in your SQL sentence");
 
         // 满足以上sql语句，附加表名
@@ -274,11 +276,13 @@ public final class DbUtil {
      * @return 该数据库查询工具的唯一实例
      */
     public DbUtil Values(Insertable... beans) {
+        log.info(_statement);
+
         // 检查格式
-        if (!_statement.matches("(insert into|INSERT INTO)\\s([a-zA-Z0-9_]+)\\s(values|VALUES)\\s"))
+        if (!_statement.matches("(insert into|INSERT INTO)\\s.+"))
             throw new WrongSqlSentenceException("There is an SQL syntax error in your SQL sentence");
 
-        var builder = new StringBuilder(_statement);
+        var builder = new StringBuilder(_statement+"values ");
         int iMax = beans.length - 1;
         int i = 0;
         for (Insertable bean : beans) {
@@ -375,9 +379,11 @@ public final class DbUtil {
      * @throws SQLException 可能产生的SQL异常
      */
     public int ExecUpdate() throws SQLException {
+        log.info(_statement);
+
         if (!(_statement.matches("(delete|DELETE)\\s(from|FROM)\\s([a-zA-Z0-9_,]+)\\s.+") ||
                 _statement.matches("(update|UPDATE)\\s([a-zA-Z0-9_,]+)\\s(set|SET).+\\s") ||
-                _statement.matches("(insert into|INSERT INTO)\\s([a-zA-Z0-9_]+)\\s(values|VALUES)\\s.+")))
+                _statement.matches("(insert into|INSERT INTO).+")))
             throw new WrongSqlSentenceException("Your query is not queryable.");
         PreparedStatement stmt = connection.prepareStatement(_statement);
         return stmt.executeUpdate();

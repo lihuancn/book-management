@@ -1,5 +1,6 @@
 package cn.huanlingli.dao;
 
+import cn.huanlingli.bean.OrderRentDetail;
 import cn.huanlingli.config.DbEngine;
 import cn.huanlingli.dao.DbUtil;
 import cn.vorbote.commons.DatabaseUtil;
@@ -61,5 +62,16 @@ public class DbUtilTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    @Test
+    public void Test05(){
+        try {
+            DbUtil util = DbUtil.GetInstance(DbEngine.MYSQL, "1.14.150.138", 3306, "book_management", "root", "255839lH");
+            int s = util.Insert("order_id", "book_id").Table("bm_order_rent_detail").Values(new OrderRentDetail(1, 3323, 4432)).ExecUpdate();
+            System.out.println(s);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

@@ -22,6 +22,6 @@ public class Book implements Insertable {
 
     @Override
     public String GetValues() {
-        return null;
+       return String.format("('%s', '%s', %f, %d)",bookName,author,price,stock);
     }
 }

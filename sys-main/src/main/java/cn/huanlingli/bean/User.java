@@ -3,6 +3,11 @@ package cn.huanlingli.bean;
 import cn.huanlingli.bean.intf.Insertable;
 import lombok.*;
 
+/**
+ * User实体类
+ *
+ * @author 易小欢 lihuan@huanlingli.cn
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,6 +25,6 @@ public class User implements Insertable {
 
     @Override
     public String GetValues() {
-        return null;
+        return String.format("('%s', '%s', '%s', '%s', %d, %d, %d)", username, password, phone, email, status, level, availableCount);
     }
 }
