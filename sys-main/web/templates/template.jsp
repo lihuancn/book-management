@@ -84,7 +84,6 @@
         <input class="sign-text" type="password" placeholder="请输入密码">
         <input class="sign-btn" type="submit" value="登录">
         <input class="sign-btn" type="submit" value="注册用户">
-
     </form>
 
 </div>
