@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN">
     <Properties>
-        <property name="log_level" value="info" />
+        <property name="log_level" value="trace" />
         <Property name="log_dir" value="log" />
         <property name="log_pattern"
                   value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%p] - [%t] %logger - %m%n" />
