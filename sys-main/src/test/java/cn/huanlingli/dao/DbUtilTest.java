@@ -1,5 +1,6 @@
 package cn.huanlingli.dao;
 
+import cn.huanlingli.bean.Book;
 import cn.huanlingli.bean.OrderRentDetail;
 import cn.huanlingli.config.DbEngine;
 import cn.vorbote.commons.DatabaseUtil;
@@ -69,6 +70,17 @@ public class DbUtilTest {
             e.printStackTrace();
         }
 
+    }
+
+    @Test
+    public void TestAddRecord() {
+        try {
+            DbUtil util = DbUtil.GetInstance(DbEngine.MYSQL, "1.14.150.138", 3306, "book_management", "root", "255839lH");
+            final int i = util.Insert().Table("bm_book").Values(new Book(5, "论中国共产党历史", "习近平", 20, 100)).ExecUpdate();
+            System.out.println(i);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
