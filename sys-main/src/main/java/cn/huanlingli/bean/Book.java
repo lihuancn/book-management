@@ -22,6 +22,17 @@ public class Book implements Insertable {
 
     @Override
     public String GetValues() {
-       return String.format("('%s', '%s', %f, %d)",bookName,author,price,stock);
+        return String.format("('%s', '%s', %f, %d)", bookName, author, price, stock);
+    }
+
+    @Override
+    public String GetValues(boolean isNeedId) {
+        var result = "";
+        if (!isNeedId) {
+            result = this.GetValues();
+        } else {
+            result = String.format("(%d, '%s', '%s', %f, %d)", id, bookName, author, price, stock);
+        }
+        return result;
     }
 }

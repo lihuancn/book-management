@@ -1,6 +1,7 @@
 package cn.huanlingli.bean;
 
 import cn.huanlingli.bean.intf.Insertable;
+import cn.vorbote.commons.DateUtil;
 import lombok.*;
 
 /**
@@ -21,5 +22,16 @@ public class OrderRentDetail implements Insertable {
     @Override
     public String GetValues() {
         return String.format("(%d, %d)", orderId, bookId);
+    }
+
+    @Override
+    public String GetValues(boolean isNeedId) {
+        var result = "";
+        if (!isNeedId) {
+            result = this.GetValues();
+        } else {
+            result = String.format("(%d, %d, %d)", id, orderId, bookId);
+        }
+        return result;
     }
 }

@@ -14,4 +14,6 @@ public interface Insertable {
      * @return 该实体的值
      */
     String GetValues();
+
+    String GetValues(boolean isNeedId);
 }

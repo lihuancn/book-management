@@ -25,4 +25,15 @@ public class Admin implements Insertable {
     public String GetValues() {
         return String.format("('%s', '%s', '%s', '%s')", username, password, phone, email);
     }
+
+    @Override
+    public String GetValues(boolean isNeedId) {
+        var result = "";
+        if (!isNeedId) {
+            result = this.GetValues();
+        } else {
+            result = String.format("(%d, '%s', '%s', '%s', '%s')", id, username, password, phone, email);
+        }
+        return result;
+    }
 }

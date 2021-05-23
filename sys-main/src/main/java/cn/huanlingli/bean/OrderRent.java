@@ -5,6 +5,7 @@ import cn.vorbote.commons.DateUtil;
 import lombok.*;
 
 import java.util.Date;
+
 /**
  * OrderRent实体类
  *
@@ -27,9 +28,24 @@ public class OrderRent implements Insertable {
 
     @Override
     public String GetValues() {
-        String  strRentDate = DateUtil.DateToString(rentDate,"");
-        String  strPlannedReturnDate = DateUtil.DateToString(plannedReturnDate,"");
-        String  strReturnDate = DateUtil.DateToString(returnDate,"");
-        return String.format("(%d, '%s', '%s', '%s', %d, %d)",userId,strRentDate,strPlannedReturnDate,strReturnDate,isReturned,bookCount);
+        String strRentDate = DateUtil.DateToString(rentDate, "");
+        String strPlannedReturnDate = DateUtil.DateToString(plannedReturnDate, "");
+        String strReturnDate = DateUtil.DateToString(returnDate, "");
+        return String.format("(%d, '%s', '%s', '%s', %d, %d)", userId, strRentDate, strPlannedReturnDate, strReturnDate, isReturned, bookCount);
+    }
+
+    @Override
+    public String GetValues(boolean isNeedId) {
+        var strRentDate = DateUtil.DateToString(rentDate, "");
+        var strPlannedReturnDate = DateUtil.DateToString(plannedReturnDate, "");
+        var strReturnDate = DateUtil.DateToString(returnDate, "");
+
+        var result = "";
+        if (!isNeedId) {
+            result = this.GetValues();
+        } else {
+            result = String.format("(%d, %d, '%s', '%s', '%s', %d, %d)", id, userId, strRentDate, strPlannedReturnDate, strReturnDate, isReturned, bookCount);
+        }
+        return result;
     }
 }

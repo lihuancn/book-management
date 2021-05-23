@@ -27,4 +27,15 @@ public class User implements Insertable {
     public String GetValues() {
         return String.format("('%s', '%s', '%s', '%s', %d, %d, %d)", username, password, phone, email, status, level, availableCount);
     }
+
+    @Override
+    public String GetValues(boolean isNeedId) {
+        var result = "";
+        if (!isNeedId) {
+            result = this.GetValues();
+        } else {
+            result = String.format("%d, '%s', '%s', '%s', '%s', %d, %d, %d", id, username, password, phone, email, status, level, availableCount);
+        }
+        return result;
+    }
 }
