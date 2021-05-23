@@ -2,12 +2,7 @@ package cn.huanlingli.dao;
 
 import cn.huanlingli.bean.OrderRentDetail;
 import cn.huanlingli.config.DbEngine;
-import cn.huanlingli.dao.DbUtil;
 import cn.vorbote.commons.DatabaseUtil;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
 import org.junit.Test;
 
 import java.sql.ResultSet;
@@ -63,6 +58,7 @@ public class DbUtilTest {
             e.printStackTrace();
         }
     }
+
     @Test
     public void Test05(){
         try {
@@ -74,4 +70,6 @@ public class DbUtilTest {
         }
 
     }
+
+
 }
