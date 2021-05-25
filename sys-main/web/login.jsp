@@ -81,13 +81,13 @@
 
 <body>
 <div class="sign-div">
-    <form class="" action="" method="post">
+    <form class="" action="api/login" method="post">
         <h1>用户登录</h1>
         <label>
-            <input class="sign-text" type="text" placeholder="请输入用户名" >
+            <input name="username" class="sign-text" type="text" placeholder="请输入用户名" >
         </label>
         <label>
-            <input class="sign-text" type="password" placeholder="请输入密码">
+            <input name="password" class="sign-text" type="password" placeholder="请输入密码">
         </label>
         <input class="sign-btn" type="submit" value="登录">
         <a href="register.jsp" >立即注册</a>

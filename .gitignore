@@ -8,6 +8,7 @@
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
+log4j.xml
 
 # Generated files
 .idea/**/contentModel.xml
@@ -68,3 +69,4 @@ fabric.properties
 
 target/
 target/*
+/sys-main/src/main/resources/log4j2.xml
