@@ -3,6 +3,7 @@ package cn.huanlingli;
 import cn.vorbote.commons.DateUtil;
 import org.junit.Test;
 
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Calendar;
 import java.util.Date;
@@ -19,6 +20,7 @@ public class Draft {
 
     @Test
     public void Test02() {
-        System.out.println(StandardCharsets.UTF_8);
+        Charset charset = StandardCharsets.UTF_8;
+        System.out.println(charset);
     }
 }
