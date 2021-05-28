@@ -6,6 +6,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * 前端提醒工具，用于向前端输出相关消息
+ *
+ * @author vorbote thills@vorbote.cn
+ */
 public final class FrontEndNoticeUtil {
 
     /**
