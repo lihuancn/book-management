@@ -71,6 +71,14 @@ public final class DbUtil {
         return _instance;
     }
 
+    /**
+     * 获取数据源
+     * @return 数据源
+     */
+    public static DataSource GetDataSource() {
+        return _instance.getDataSource();
+    }
+
     // region Getter 和 Setter
 
 
