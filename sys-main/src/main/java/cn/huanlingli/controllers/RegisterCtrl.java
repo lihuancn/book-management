@@ -10,6 +10,7 @@ import cn.vorbote.commons.DatabaseUtil;
 import cn.vorbote.commons.HashUtil;
 import cn.vorbote.commons.StringUtil;
 import cn.vorbote.commons.enums.EncryptMethod;
+import cn.vorbote.simplejwt.AccessKeyUtil;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,13 +19,28 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.sql.SQLException;
 
-
+/**
+ * 用于注册的Servlet
+ *
+ * @author lihuan lihuan@huanlingli.cn
+ */
 @WebServlet(urlPatterns = "/api/register", name = "RegisterCtrl")
 @Slf4j
 public class RegisterCtrl extends HttpServlet {
 
     private final static Gson gson = Helpers.GetGson();
+    private final static AccessKeyUtil accessKeyUtil = Helpers.GetAccessKeyUtil();
+    private static DbUtil db;
+
+    static {
+        try {
+            db = Helpers.GetDbUtil();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

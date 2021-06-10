@@ -7,13 +7,18 @@ import com.google.gson.Gson;
 
 import java.sql.SQLException;
 
+/**
+ * 容器，存放需要经常使用的组件
+ *
+ * @author vorbote thills@vorbote.cn
+ */
 public final class Helpers {
 
     private Helpers() {
     }
 
-    private static final String SECRET = "";
-    private static final String ISSUER = "";
+    private static final String SECRET = "lihuan-bm-system";
+    private static final String ISSUER = "lihuan@huanlingli.cn";
 
     private static final Gson gson = new Gson();
     private static final JwtUtil jwt = new JwtUtil(SECRET, ISSUER);
