@@ -1,7 +1,6 @@
 package cn.huanlingli.bean;
 
 import cn.huanlingli.bean.intf.Insertable;
-import cn.vorbote.commons.DateUtil;
 import lombok.*;
 
 /**

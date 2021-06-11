@@ -1,10 +1,8 @@
 package cn.huanlingli.controllers;
 
-import cn.huanlingli.config.ContentType;
 import cn.huanlingli.config.Helpers;
 import cn.huanlingli.dao.DbUtil;
 import cn.huanlingli.util.FrontEndNoticeUtil;
-import cn.huanlingli.util.ResponseUtil;
 import cn.vorbote.commons.DatabaseUtil;
 import cn.vorbote.commons.HashUtil;
 import cn.vorbote.commons.StringUtil;
@@ -22,14 +20,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
-import java.util.HashMap;
 
 /**
  * 处理登录请求
  *
  * @author vorbote thills@vorbote.cn
  */
-@WebServlet(urlPatterns = "/api/login", name = "LoginCtrl")
+@WebServlet(urlPatterns = "/api/no-auth/login", name = "LoginCtrl")
 @Slf4j
 public class LoginCtrl extends HttpServlet {
 
@@ -47,13 +44,11 @@ public class LoginCtrl extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ResponseUtil.ChangeContentType(resp, ContentType.HTML, StandardCharsets.UTF_8);
         resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ResponseUtil.ChangeContentType(resp, ContentType.HTML, StandardCharsets.UTF_8);
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         if (StringUtil.IsBlank(username) && StringUtil.IsBlank(password)) {

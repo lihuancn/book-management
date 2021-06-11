@@ -1,11 +1,9 @@
 package cn.huanlingli.controllers;
 
-import cn.huanlingli.config.ContentType;
 import cn.huanlingli.config.DbEngine;
 import cn.huanlingli.config.Helpers;
 import cn.huanlingli.dao.DbUtil;
 import cn.huanlingli.util.FrontEndNoticeUtil;
-import cn.huanlingli.util.ResponseUtil;
 import cn.vorbote.commons.DatabaseUtil;
 import cn.vorbote.commons.HashUtil;
 import cn.vorbote.commons.StringUtil;
@@ -26,8 +24,9 @@ import java.sql.SQLException;
  *
  * @author lihuan lihuan@huanlingli.cn
  */
-@WebServlet(urlPatterns = "/api/register", name = "RegisterCtrl")
+@WebServlet(urlPatterns = "/api/no-auth/register", name = "RegisterCtrl")
 @Slf4j
+@SuppressWarnings("all")
 public class RegisterCtrl extends HttpServlet {
 
     private final static Gson gson = Helpers.GetGson();
@@ -44,15 +43,12 @@ public class RegisterCtrl extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ResponseUtil.ChangeContentType(response, ContentType.HTML, StandardCharsets.UTF_8);
         FrontEndNoticeUtil.Alert(response, "请求方式错误");// 请求方式错误
         response.setStatus(HttpServletResponse.SC_FORBIDDEN);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ResponseUtil.ChangeContentType(response, ContentType.HTML, StandardCharsets.UTF_8);
-
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
@@ -60,7 +56,7 @@ public class RegisterCtrl extends HttpServlet {
             response.getWriter().write("<script>alert('用户名和密码不能为空！')</script>");
         } else {
             password = HashUtil.Encrypt(EncryptMethod.SHA_256, password);
-            log.info("password:{}", password);
+            // log.info("password:{}", password);
             try {
                 DbUtil dbUtil = DbUtil.GetInstance(DbEngine.MYSQL, "1.14.150.138", 3306, "book_management", "root", "255839lH");
                 var data = DatabaseUtil.ConvertList(dbUtil.ExecQuery(String.format("select username from bm_user where username = '%s';", username))).get(0);

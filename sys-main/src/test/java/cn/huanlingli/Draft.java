@@ -1,6 +1,6 @@
 package cn.huanlingli;
 
-import cn.vorbote.commons.DateUtil;
+import cn.vorbote.commons.TimeUtil;
 import cn.vorbote.commons.MathUtil;
 import cn.vorbote.commons.StringUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -13,10 +13,10 @@ import java.util.Date;
 public class Draft {
     @Test
     public void Test01(){
-        Date date = DateUtil.GetDate(2020, Calendar.JANUARY, 17);
-        Calendar calendar = DateUtil.GetCalendar(date);
+        Date date = TimeUtil.GetDate(2020, Calendar.JANUARY, 17);
+        Calendar calendar = TimeUtil.GetCalendar(date);
         calendar.add(Calendar.DAY_OF_MONTH,3);
-        date = DateUtil.GetDate(calendar);
+        date = TimeUtil.GetDate(calendar);
         System.out.println(date);
     }
 

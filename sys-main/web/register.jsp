@@ -80,7 +80,7 @@
 </head>
 <body>
 <div class="sign-div">
-    <form class="" action="" method="post">
+    <form class="" action="api/no-auth/login" method="post">
         <h1>用户注册</h1>
         <label>
             <input class="sign-text" type="text" placeholder="请输入用户名" >

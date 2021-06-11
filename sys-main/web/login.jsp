@@ -81,7 +81,7 @@
 
 <body>
 <div class="sign-div">
-    <form class="" action="api/login" method="post">
+    <form class="" action="api/no-auth/login" method="post">
         <h1>用户登录</h1>
         <label>
             <input name="username" class="sign-text" type="text" placeholder="请输入用户名" >

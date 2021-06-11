@@ -1,7 +1,7 @@
 package cn.huanlingli.bean;
 
 import cn.huanlingli.bean.intf.Insertable;
-import cn.vorbote.commons.DateUtil;
+import cn.vorbote.commons.TimeUtil;
 import lombok.*;
 
 import java.util.Date;
@@ -28,17 +28,17 @@ public class OrderRent implements Insertable {
 
     @Override
     public String GetValues() {
-        String strRentDate = DateUtil.DateToString(rentDate, "");
-        String strPlannedReturnDate = DateUtil.DateToString(plannedReturnDate, "");
-        String strReturnDate = DateUtil.DateToString(returnDate, "");
+        String strRentDate = TimeUtil.DateToString(rentDate, "");
+        String strPlannedReturnDate = TimeUtil.DateToString(plannedReturnDate, "");
+        String strReturnDate = TimeUtil.DateToString(returnDate, "");
         return String.format("(%d, '%s', '%s', '%s', %d, %d)", userId, strRentDate, strPlannedReturnDate, strReturnDate, isReturned, bookCount);
     }
 
     @Override
     public String GetValues(boolean isNeedId) {
-        var strRentDate = DateUtil.DateToString(rentDate, "");
-        var strPlannedReturnDate = DateUtil.DateToString(plannedReturnDate, "");
-        var strReturnDate = DateUtil.DateToString(returnDate, "");
+        var strRentDate = TimeUtil.DateToString(rentDate, "");
+        var strPlannedReturnDate = TimeUtil.DateToString(plannedReturnDate, "");
+        var strReturnDate = TimeUtil.DateToString(returnDate, "");
 
         var result = "";
         if (!isNeedId) {
