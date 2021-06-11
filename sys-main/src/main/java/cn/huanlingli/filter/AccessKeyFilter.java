@@ -21,6 +21,7 @@ import java.util.List;
 public class AccessKeyFilter implements Filter {
 
     private static final AccessKeyUtil util = Helpers.GetAccessKeyUtil();
+    // 需要将不进行AccessKey验证的路径写入这个List
     private static final List<String> EXCLUDE_PATHS = Arrays.asList(
             "/",
             "/index.jsp",
@@ -46,8 +47,10 @@ public class AccessKeyFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
 
+        // 读取系统路径并删除sys-main
         var path = req.getRequestURI().replaceFirst("/sys-main", "");
 
+        // 如果路径属于不需要检查的路径则直接放行
         if (EXCLUDE_PATHS.contains(path)) {
             chain.doFilter(request, response);
         }
@@ -65,7 +68,7 @@ public class AccessKeyFilter implements Filter {
                     log.info("旧Token「{}」即将过期，更换为新Token「{}」", accessKey, newKey);
                 }
 
-                chain.doFilter(req, resp);
+                chain.doFilter(request, response);
             } catch (AlgorithmMismatchException e) {
                 log.error("The algorithm stated in the token's header it's not equal to the one defined in the JWTVerifier.");
                 FrontEndNoticeUtil.Alert(resp, "算法不匹配，请重新登录申请Token");
