@@ -8,14 +8,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * 用于将{@code Request}和{@code Response}的编码方式修改为{@code UTF-8}
+ *
+ * @author vorbote thills@vorbote.cn
+ */
 @Slf4j
 public class CharacterFilter implements Filter {
 
+    @Override
     public void init(FilterConfig config)
             throws ServletException {
         log.info("CharacterFilter 已经加载成功...");
     }
 
+    @Override
     public void destroy() {
         log.info("CharacterFilter 已经销毁成功...");
     }
