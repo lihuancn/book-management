@@ -57,16 +57,27 @@ public class LoginCtrl extends HttpServlet {
             password = HashUtil.Encrypt(EncryptMethod.SHA_256, password);
             log.info("password: {}", password);
             try {
-                var data = DatabaseUtil.ConvertList(db.ExecQuery(StringUtil.Format("select username, password from bm_user where username = '{}' and password = '{}';", username, password))).get(0);
+                var data = DatabaseUtil.ConvertList(db.ExecQuery(StringUtil.Format("select count(1) from bm_user where username = '{}' and password = '{}';", username, password))).get(0);
                 int size = data.keySet().size();
                 if (size >= 1) {
-                    var accessKey = accessKeyUtil.CreateToken(30 * TimeConst.MINUTE,
-                            "user", username, null
+                    var result = db.ExecQuery(StringUtil.Format("select status from bm_user where username = '{}'", username));
+                    var status = result.getInt(0);
+                    if (status == 1) {
+                        var accessKey = accessKeyUtil.CreateToken(30 * TimeConst.MINUTE,
+                                "user", username, null
                             /*new HashMap<>() {{
                                 // use put(String, Object) to put data to hash map.
                             }}*/);
-                    resp.addHeader("Access-Key", accessKey);
-                    FrontEndNoticeUtil.Alert(resp, "登录成功！");
+                        resp.addHeader("Access-Key", accessKey);
+                        FrontEndNoticeUtil.Alert(resp, "登录成功！");
+                    } else if (status == 2) {
+                        resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                        FrontEndNoticeUtil.Alert(resp, "账户已被封禁，请稍后再试！");
+                    } else {
+                        resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                        FrontEndNoticeUtil.Alert(resp, "账户已被删除！");
+                    }
+
                 }
 
             } catch (Exception e) {

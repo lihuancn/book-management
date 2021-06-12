@@ -50,7 +50,7 @@
         <dependency>
             <groupId>cn.vorbote</groupId>
             <artifactId>commons</artifactId>
-            <version>1.5.3</version>
+            <version>1.5.4</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.projectlombok</groupId>

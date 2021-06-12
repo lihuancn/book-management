@@ -24,9 +24,12 @@ public class AccessKeyFilter implements Filter {
     // 需要将不进行AccessKey验证的路径写入这个List
     private static final List<String> EXCLUDE_PATHS = Arrays.asList(
             "/",
-            "/index.jsp",
-            "/login.jsp",
-            "/register.jsp",
+            "/index.html",
+            "/index.html",
+            "/login.html",
+            "/login.html",
+            "/register.html",
+            "/register.html",
             "/api/no-auth/login",
             "/api/no-auth/register"
     );
@@ -55,36 +58,40 @@ public class AccessKeyFilter implements Filter {
             chain.doFilter(request, response);
         }
 
+        // 从请求头中获取AccessKey
         var accessKey = req.getHeader("Access-Key");
 
-        if (accessKey != null && !StringUtil.IsBlank(accessKey)) {
+        // 确保AccessKey不为空
+        if (!StringUtil.IsBlank(accessKey)) {
             try {
                 var info = util.Info(accessKey);
-                var nbf = info.getNotBefore().getTime() / 1000;
-                var now = System.currentTimeMillis() / 1000;
-                if (nbf - now < 300) {
+                var nbf = info.getNotBefore().getTime() / 1000; // 获取过期时间
+                var now = System.currentTimeMillis() / 1000;    // 获取当前时间
+                if (nbf - now < 300) {  // 判断当前时间到过期时间是否在5分钟（300秒）内
+                    // 原令牌即将过期，申请新令牌
                     var newKey = util.Renew(accessKey);
                     resp.setHeader("Access-Key", newKey);
                     log.info("旧Token「{}」即将过期，更换为新Token「{}」", accessKey, newKey);
                 }
 
+                // 完成验证，放行
                 chain.doFilter(request, response);
             } catch (AlgorithmMismatchException e) {
                 log.error("The algorithm stated in the token's header it's not equal to the one defined in the JWTVerifier.");
                 FrontEndNoticeUtil.Alert(resp, "算法不匹配，请重新登录申请Token");
-                req.getRequestDispatcher("/login.jsp").forward(req, resp);
+                req.getRequestDispatcher("/login.html").forward(req, resp);
             } catch (SignatureVerificationException e) {
                 log.error("The signature is invalid.");
                 FrontEndNoticeUtil.Alert(resp, "签名错误，请重新登录申请Token");
-                req.getRequestDispatcher("/login.jsp").forward(req, resp);
+                req.getRequestDispatcher("/login.html").forward(req, resp);
             } catch (TokenExpiredException e) {
                 log.error("The token has expired.");
                 FrontEndNoticeUtil.Alert(resp, "令牌已过期，请重新登录申请Token");
-                req.getRequestDispatcher("/login.jsp").forward(req, resp);
+                req.getRequestDispatcher("/login.html").forward(req, resp);
             } catch (InvalidClaimException e) {
                 log.error("A claim contained a different value than the expected one.");
                 FrontEndNoticeUtil.Alert(resp, "无效的载荷，请重新登录申请Token");
-                req.getRequestDispatcher("/login.jsp").forward(req, resp);
+                req.getRequestDispatcher("/login.html").forward(req, resp);
             }
         }
     }
