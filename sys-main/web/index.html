@@ -9,32 +9,42 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/layui/2.6.8/layui.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/layui/2.6.8/css/layui.min.css"/>
+    <link rel="stylesheet" href="asserts/css/bm-sys.css"/>
 </head>
 
 <body>
 <div class="sign-div">
 
-    <ul class="layui-nav">
+    <ul class="layui-nav layui-bg-blue">
         <li class="layui-nav-item">
-            <a href="">首页</a>
+            <a href="index.html">首页</a>
         </li>
         <li class="layui-nav-item">
-            <a href="">馆藏内容</a>
+            <a href="#">馆藏内容</a>
         </li>
         <li class="layui-nav-item">
-            <a href="">登录</a>
+            <a href="login.html">登录</a>
+        </li>
+        <li class="layui-nav-item">
+            <a href="register.html">注册</a>
         </li>
     </ul>
 
-    <button type="button" class="layui-btn layui-btn-radius layui-btn-primary"><i class="layui-icon layui-icon-senior"></i>立即进入</button>
+    <div class="layui-main" style="margin: 0 auto;">
+        <div style="text-align: center;">
+            <a type="button" id="BtnLogin" class="layui-btn layui-btn-radius layui-btn-primary top-margin" href="login.html">
+                <i class="layui-icon layui-icon-senior"></i>立即进入
+            </a>
+        </div>
+    </div>
+
 
 </div>
 </body>
 
 <script>
-    layui.use('element', function(){
+    layui.use('element', function () {
         let element = layui.element;
-
     });
 </script>
 
