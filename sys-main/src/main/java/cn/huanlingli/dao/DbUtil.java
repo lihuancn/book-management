@@ -73,6 +73,7 @@ public final class DbUtil {
 
     /**
      * 获取数据源
+     *
      * @return 数据源
      */
     public static DataSource GetDataSource() {
@@ -435,6 +436,26 @@ public final class DbUtil {
     }
 
     /**
+     * 执行查询
+     *
+     * @param query  查询语句
+     * @param params 查询的参数
+     * @return 查询出的结果集
+     * @throws SQLException 可能产生SQL异常，将在产生时抛出
+     */
+    public ResultSet ExecQuery(String query, Object... params) throws SQLException {
+        var stmt = connection.prepareStatement(query);
+
+        var i = 1;
+        for (Object e : params) {
+            stmt.setObject(i, e);
+            ++i;
+        }
+
+        return stmt.executeQuery();
+    }
+
+    /**
      * 执行{@code update}、{@code insert}、{@code delete}语句
      *
      * @param update 更新操作语句
@@ -443,6 +464,26 @@ public final class DbUtil {
      */
     public int ExecUpdate(String update) throws SQLException {
         PreparedStatement stmt = connection.prepareStatement(update);
+        return stmt.executeUpdate();
+    }
+
+    /**
+     * 执行查询
+     *
+     * @param query  查询语句
+     * @param params 查询的参数
+     * @return 查询出的结果集
+     * @throws SQLException 可能产生SQL异常，将在产生时抛出
+     */
+    public int ExecUpdate(String query, Object... params) throws SQLException {
+        var stmt = connection.prepareStatement(query);
+
+        var i = 1;
+        for (Object e : params) {
+            stmt.setObject(i, e);
+            ++i;
+        }
+
         return stmt.executeUpdate();
     }
 }
